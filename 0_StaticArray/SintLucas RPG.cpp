@@ -2,7 +2,7 @@
 //
 
 #include <chrono>
-#include <iostream>
+
 
 static unsigned int MATH_RANDOMSEED = 5;
 
@@ -32,12 +32,13 @@ static unsigned int RandUintMinMax(unsigned int min, unsigned int max)
 	return RandomUInt()% (max + 1 - min) + min;
 }
 
+#include <iostream>
 
 int main()
 {
 	auto time = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()).time_since_epoch();
 	MATH_RANDOMSEED = static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(time).count());
-
+	
 	unsigned int intArray[10];
 
 	for (size_t i = 0; i < 10; i++)

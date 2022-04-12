@@ -33,13 +33,10 @@ static unsigned int RandUintMinMax(unsigned int min, unsigned int max)
 	return RandomUInt() % (max + 1 - min) + min;
 }
 
-
-int main()
+unsigned int* GetArrayOfRandomInts(unsigned int& size)
 {
-	auto time = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()).time_since_epoch();
-	MATH_RANDOMSEED = static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(time).count());
-
 	unsigned int randomSize = RandUintMinMax(20, 30);
+	size = randomSize;
 	unsigned int* intArray = new unsigned int[randomSize];
 
 	std::cout << "The array it's size is: " << randomSize << std::endl;
@@ -47,6 +44,21 @@ int main()
 	for (size_t i = 0; i < randomSize; i++)
 	{
 		intArray[i] = RandUintMinMax(10, 20);
+	}
+
+	return intArray;
+}
+
+int main()
+{
+	auto time = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()).time_since_epoch();
+	MATH_RANDOMSEED = static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(time).count());
+
+	unsigned int arraySize = 0;
+	unsigned int* intArray = GetArrayOfRandomInts(arraySize);
+
+	for (size_t i = 0; i < arraySize; i++)
+	{
 		std::cout << "index " << i << " it's value is: " << intArray[i] << std::endl;
 	}
 
