@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+//Why a .cpp file? This article explains it well in combination with the header.: https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/
+//In short, you place definitions here, you get your declerations from the .h file, which for our case is Character.h.
+
 Character::Character()
 {
 	maxHitPoints = RandUintMinMax(10, 20);
@@ -22,11 +25,13 @@ Character::~Character()
 
 bool Character::TakeDamage(int a_DamageTaken)
 {
+	//If the damage would reduce it to 0 or lower hp return false, this indicates that it has died.
 	if (hitPoints <= a_DamageTaken)
 	{
 		hitPoints = 0;
 		return false;
 	}
+	//Else just deduct Hitpoints equal to the damage taken.
 	hitPoints -= a_DamageTaken;
 	 
 	return true;
